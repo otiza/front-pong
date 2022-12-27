@@ -2,7 +2,8 @@ import React from "react";
 import profile_cover_img from "../../images/profile_cover_img.png";
 import avatar_img from "../../images/avatar_img.png";
 
-function ProfileSection() {
+function ProfileSection(props) {
+  
   return (
     <>
       <div className="bg-[#2c2f489c] rounded-[10px]">

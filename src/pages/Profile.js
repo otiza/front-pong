@@ -1,4 +1,5 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect } from "react";
 import Achievements from "../components/Profile/Achievements";
 import Friends from "../components/Profile/Friends";
 import ProfileSection from "../components/Profile/ProfileSection";

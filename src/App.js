@@ -10,7 +10,7 @@ import Profile from "./pages/Profile";
 function App() {
   // OPEN SIDE BAR ON HOVER
   const [isHovering, setIsHovering] = useState(false);
-
+  
   return (
     <div className="App">
       <div className="flex">
