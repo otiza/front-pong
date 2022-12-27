@@ -3,8 +3,23 @@ import user_img from "../images/user_img_extraLarge.png";
 import edit_name_icon from "../images/edit_profile_name_icon.svg";
 import edit_photo_icon from "../images/edit_profile_photo_icon.svg";
 import change_wallpaper_icon from "../images/change_wallpaper_icon.svg";
-
+import { useContext, useEffect, useState } from "react";
+import axios from "axios";
 function Settings() {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    
+    axios.get('http://localhost:5000/users/me', {
+      withCredentials: true,
+    }).then((res) => {
+      setData(res.data);
+     
+      console.log(res.data);
+    }).catch((err) => {
+      console.table(err);
+      
+    })
+  },[]);
   return (
     <>
       <div className="settings h-full shadow-[0_4px_4x_rgba(0,0,0,0.25)] rounded-[20px]">
@@ -27,7 +42,7 @@ function Settings() {
 
             {/* USER NAME */}
             <h3 className="ml-[34px] text-white text-[25px] leading-[38px] font-semibold">
-              Zakariya Sidki
+            {data.username}
             </h3>
           </div>
 

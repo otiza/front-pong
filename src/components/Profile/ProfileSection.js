@@ -1,9 +1,57 @@
 import React from "react";
+import { useContext, useEffect, useState } from "react";
 import profile_cover_img from "../../images/profile_cover_img.png";
 import avatar_img from "../../images/avatar_img.png";
-
+import axios from "axios";
 function ProfileSection(props) {
-  
+  const [data, setData] = useState([]);
+  const [wins, setWin] = useState([]);
+  const [lost, setlose] = useState([]);
+  useEffect(() => {
+    
+    axios.get('http://localhost:5000/users/me', {
+      withCredentials: true,
+    }).then((res) => {
+      setData(res.data);
+     
+      console.log(res.data);
+    }).catch((err) => {
+      console.table(err);
+      
+    })
+  },[]);
+  useEffect(() => {
+    
+    axios.get('http://localhost:5000/games/winhistory', {
+      withCredentials: true,
+    }).then((res) => {
+      console.log("res.data.length");
+
+      console.log(res.data.length);
+      setWin(res.data.gameslost.length);
+     
+      console.log(res.data);
+    }).catch((err) => {
+      console.table(err);
+      
+    })
+  },[]);
+  useEffect(() => {
+    
+    axios.get('http://localhost:5000/games/losehistory', {
+      withCredentials: true,
+    }).then((res) => {
+      console.log("res.data.length");
+
+      console.log(res.data.length);
+      setlose(res.data.gameslost.length);
+     
+      console.log(res.data);
+    }).catch((err) => {
+      console.table(err);
+      
+    })
+  },[]);
   return (
     <>
       <div className="bg-[#2c2f489c] rounded-[10px]">
@@ -20,7 +68,7 @@ function ProfileSection(props) {
           <div className="flex-1 flex items-center justify-center">
             <h3 className="text-[22px] leading-[26px] font-bold">
               {/* WIN COUNT */}
-              Win Count:<span className="ml-3">23</span>
+              Win Count:<span className="ml-3">{wins}</span>
             </h3>
           </div>
           <div className="flex-1 text-center -mt-24 pb-3.5">
@@ -35,17 +83,17 @@ function ProfileSection(props) {
               </div>
               {/* USER DETAILS */}
               <h4 className="text-[20px] leading-[30px] font-medium mb-px">
-                Zaak Sidki
+                {data.username}
               </h4>
               <span className="text-[14px] leading-[21px] opacity-50 font-light">
-                @zsidki
+                {data.email}
               </span>
             </div>
           </div>
           <div className="flex-1 flex items-center justify-center">
             <h3 className="text-[22px] leading-[26px] font-bold">
               {/* LOSS COUNT */}
-              Loss Count:<span className="ml-3">15</span>
+              Loss Count:<span className="ml-3">{lost}</span>
             </h3>
           </div>
         </div>
