@@ -1,8 +1,11 @@
-import React from "react";
 
+import React, { useContext, useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 function MatchhistoryItem(props) {
   // INTEGRATE DATA
-  const { won, userId, email, username, winnerscore, loserscore, time, } = props.data;
+  const { won,  opid, winnerscore, loserscore, time, } = props.data;
+
   return (
     <tr className="w-full ">
       <td className="flex justify-center items-center">
@@ -12,7 +15,7 @@ function MatchhistoryItem(props) {
               src="https://ucarecdn.com/e41c47fc-da5b-4010-b4cf-6fe090089ec1/"
               alt="friend_img"
               />
-            <span>keddib</span>
+            <Link to={`/user/${opid}`}>{opid}</Link>
         </div>
       </td>
       <td className="">

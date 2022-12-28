@@ -3,13 +3,17 @@ import { useContext, useEffect, useState } from "react";
 import profile_cover_img from "../../images/profile_cover_img.png";
 import avatar_img from "../../images/avatar_img.png";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
 function ProfileSection(props) {
   const [data, setData] = useState([]);
   const [wins, setWin] = useState([]);
   const [lost, setlose] = useState([]);
+  const location = useLocation();
+
+  const path = window.location.pathname.split("/").at(-1);
   useEffect(() => {
-    
-    axios.get('http://localhost:5000/users/me', {
+    const endPoint = path === 'profile' ? "users/me" : `users/username/${path}`;
+    axios.get(`http://localhost:5000/${endPoint}`, {
       withCredentials: true,
     }).then((res) => {
       setData(res.data);
@@ -19,7 +23,7 @@ function ProfileSection(props) {
       console.table(err);
       
     })
-  },[]);
+  },[location]);
   useEffect(() => {
     
     axios.get('http://localhost:5000/games/winhistory', {

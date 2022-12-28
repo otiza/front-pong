@@ -80,9 +80,7 @@ function MatchHistory() {
                             {
                               won: friend.winnerid === me.Userid ? 1 : 0, 
                               key: index,
-                              userId: friend.winnerid,
-                              email: friend.email,
-                              username: friend.winnerid,
+                              opid: friend.winnerid === me.Userid? friend.loser.username : friend.winner.username ,
                               winnerscore: friend.Scorewin,
                               loserscore: friend.Scorelose,
                               time: new Date(friend.playedat).toISOString().slice(0,10),//.replace(/-/g,""),
@@ -90,7 +88,7 @@ function MatchHistory() {
                             if (!expanded )
                   {
 
-                  if (index < 8)
+                  if (index < 2)
                       return (
                         <MatchhistoryItem key={index} data={data} />
                       )

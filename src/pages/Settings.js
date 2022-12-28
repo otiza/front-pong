@@ -70,7 +70,7 @@ function Settings() {
             <button className="flex items-center">
               <img src={change_wallpaper_icon} alt="change_wallpaper_icon" />
               <span className="ml-9 text-white text-[20px] leading-[30px]">
-                Change Wallpaper
+                2FA Settings
               </span>
             </button>
           </div>

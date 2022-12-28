@@ -1,4 +1,5 @@
 import React from "react";
+import { useContext, useEffect, useState } from "react";
 import logo from "../images/logo.svg";
 import logo_text from "../images/logo_text.svg";
 import explore_icon from "../images/explore_icon.svg";
@@ -11,10 +12,27 @@ import settings_icon from "../images/settings_icon.svg";
 import user_img from "../images/user_img.png";
 import exit_icon from "../images/exit_icon.svg";
 import { Link } from "react-router-dom";
-
+import axios from "axios";
 import { useLocation } from "react-router-dom";
 
 function Sidebar(props) {
+  const handlelogout = () => {
+    window.location = "http://localhost:5000/users/logout";
+  };
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    
+    axios.get('http://localhost:5000/users/me', {
+      withCredentials: true,
+    }).then((res) => {
+      setData(res.data);
+     
+      console.log(res.data);
+    }).catch((err) => {
+      console.table(err);
+      
+    })
+  },[]);
   // FUNCTION TO OPEN SIDEBAR
   const handleMouseOver = () => {
     props.setIsHovering(true);
@@ -248,18 +266,18 @@ function Sidebar(props) {
                 {/* USER DETAILS */}
                 <div className="pr-[18px]">
                   <h4 className="text-white text-[14px] leading-[20px] font-medium opacity-90">
-                    ZaAk Sidki
+                    {data.username}
                   </h4>
                   <p className="text-white text-[12px] leading-[18px] opacity-30">
                     zsidki
                   </p>
                 </div>
                 {/* EXIT ICON */}
-                <img
+                <button onClick={handlelogout}><img
                   className="pr-2 cursor-pointer"
                   src={exit_icon}
                   alt="exit-icon"
-                />
+                /></button>
               </div>
             </div>
           </div>

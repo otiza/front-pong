@@ -6,13 +6,16 @@ import MatchHistory from "../components/Profile/MatchHistory";
 import ProfileSection from "../components/Profile/ProfileSection";
 
 function Profile() {
+  const path = window.location.pathname.split("/").at(-1);
   return (
     <>
       <div className="space-y-3.5">
         <ProfileSection />
         <Achievements />
         {/* A JSX comment <div class="flex space-x-4 ...">*/}
-        <Friends />
+        {path === "profile" ?
+        <Friends /> : null
+        }
         <MatchHistory />
         
       </div>
